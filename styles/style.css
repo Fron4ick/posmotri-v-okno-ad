@@ -1,51 +1,475 @@
+/* style.css — очищенная и согласованная версия
+   Ключевая идея: приоритет классов из разметки, доступность, единообразие */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-html {
-  block-size: 100%;
-}
-
-.page {
-  inline-size: 1200px;
-  block-size: 100%;
-  margin: auto;
-  color: #fff;
-  font-family: 'Fira Sans Condensed', sans-serif;
-  font-size: 18px;
-  background-color: #1b1919;
-}
-
-h1,
-h2,
-h3,
-h4,
-p,
-ul,
-ol,
-li,
-blockquote,
-fieldset {
+/* --- базовые настройки --- */
+html, body {
+  height: 100%;
   margin: 0;
+}
+
+body {
+  background: #1b1919;
+  color: #fff;
+  font-family: "Fira Sans Condensed", Arial, sans-serif;
+  font-size: 18px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* макет сделан как фиксированная "канва" */
+}
+
+/* --- visually-hidden (один корректный вариант) --- */
+.visually-hidden {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- контейнер страницы --- */
+.page {
+  width: 1200px;
+  max-width: 95vw;
+  aspect-ratio: 3/2;
+  position: relative;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+/* --- основной флекс-ряд --- */
+.content {
+  width: 1140px;
+  height: 534px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-end;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* --- фокус и доступность --- */
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+:focus { outline: none; }
+
+/* ---------------- LEFT: result ---------------- */
+.result {
+  width: 711px;
+  height: 456px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.result__video-container {
+    width: 711px;
+    height: 386px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
+
+/* overlay для прелоадера/ошибки */
+.result__preloader,
+.result__error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(27, 25, 25, 0.4);
+  z-index: 5;
+}
+
+.result__error {
+  color: #fff;
+  font-family: "Oswald", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* ---------------- search form ---------------- */
+.search-form {
+    width: 711px;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* прижимаем к низу */
+    gap: 16px;
+    position: relative;
+}
+
+/* контейнер левой части (город + чекбоксы) */
+.search-form__left {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex: 1;
+}
+
+/* карточки полей/лейблов */
+.search-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search-form__fieldset-title,
+.search-form__checkbox-text,
+.search-form__label-text {
+  font-size: 18px;
+  color: #fff;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+/* инпут-обёртка (в некоторых вариантах в разметке есть) */
+.search-form__input,
+.search-form__textfield {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 2px 6px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+}
+
+/* сам текстовый input */
+.search-form__text,
+.search-form__textfield input,
+input.search-form__text,
+input.search-form__textfield {
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,0.9);
+  font-size: 18px;
+  font-family: inherit;
+  appearance: none;
+  width: 100%;
+}
+
+.search-form__text::placeholder,
+.search-form__textfield::placeholder,
+input.search-form__text::placeholder,
+input.search-form__textfield::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* fieldset basics */
+.search-form__fieldset {
+  border: 0;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-ul,
-ol {
+.search-form__checkbox-list {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 2px;
+}
+
+/* кастомные чекбоксы (label содержит input + псевдоэлемент) */
+.search-form__checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-form__pseudo-checkbox {
+  width: 19px;
+  height: 19px;
+  border: 1px solid #fff;
+  display: inline-block;
+  position: relative;
+}
+
+/* галочка/заполнение внутри псевдокнопки */
+.search-form__pseudo-checkbox::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: #fff;
+  opacity: 0;
+  transition: opacity .12s;
+}
+
+/* надёжный селектор для checked — учитываем разные имена классов input'ов в разметке */
+.search-form__checkbox input:checked + .search-form__pseudo-checkbox::after,
+.search-form__checkbox-input:checked + .search-form__pseudo-checkbox::after,
+.search-form__checkbox input:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1;
+}
+
+/* текст рядом с чекбоксом */
+.search-form__checkbox-text,
+.search-form__label-text {
+  font-size: 18px;
+}
+
+/* hover underline */
+.search-form__checkbox:hover .search-form__checkbox-text,
+.button:hover,
+.content__card-link:hover .content__video-card-title,
+.content__card-link:hover .content__video-card-description {
+  text-decoration: underline;
+}
+
+/* кнопки */
+.button {
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  color: #fff;
+  font-family: inherit;
+}
+
+.search-form__submit-button {
+  width: 194px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+/* ---------------- RIGHT: details ---------------- */
+.content__details {
+  width: 399px;
+  height: 534px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 6px 0 0 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.title {
+  width: 259;
+  height: 210;
+  font-family: "Oswald", Arial, sans-serif;
+  font-weight: 850;
+  font-size: 75px;
+  line-height: 0.9;
+  color: #545050;
+  margin: 0;
+  transform: scaleX(0.7);
+  transform-origin: left center;
+}
+
+.content__accent {
+  color: #fff;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+/* ---------------- список результатов ---------------- */
+.content__search-results {
+  width: 390px;
+  height: 566px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.content__list {
   list-style: none;
+  margin: 0;
+  padding: 0 0 20px 0;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-sizing: border-box;
 }
 
-/* Кастомный скроллбар */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+.content__list-preloader {
+  position: absolute;
+  padding: 8px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgb(217 217 217 / 10%);
+
+
+.content__card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  outline: 0;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #D9D9D9;
+.content__video-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 2px; /* немного заполнения, чтобы карточки не слипались с краем */
 }
+
+.content__video-card-thumbnail {
+  width: 194px;
+  height: 103px;
+  flex: 0 0 194px;
+  overflow: hidden;
+  border: 0;
+  display: block;
+}
+
+/* поддерживаем оба варианта: <img class="content__video-card-thumbnail"> и <div class="content__video-card-thumbnail"><img/></div> */
+.content__video-card-thumbnail img,
+img.content__video-card-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.content__video-card-description-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content__video-card-title {
+  font-family: "Oswald", Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content__video-card-description {
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 6px 0 0;
+}
+
+/* активная карточка */
+.content__card-link_current .content__video-card {
+  background: #545050;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* hover и focus для доступности */
+.content__card-link:hover .content__video-card-title,
+.content__card-link:focus-visible .content__video-card-title {
+  text-decoration: underline;
+}
+
+.content__card-link:focus { outline: none; }
+
+/* more button wrapper */
+.more-wrap {
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 12px;
+}
+
+.more-button {
+  width: 100%;
+  height: 34px;
+}
+
+/* spinner */
+.spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.12);
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+.spinner.small {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+}
+
+/* error */
+.error-block,
+.error {
+  padding: 20px;
+  background: #545050;
+  border-radius: 4px;
+}
+
+.error-text,
+.error__title {
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* курсор для интерактивных элементов */
+a, button, .search-form__checkbox {
+  cursor: pointer;
+}
+
+/* скроллбар (тонкий) */
+.content__list::-webkit-scrollbar { width: 6px; }
+.content__list::-webkit-scrollbar-track { background: transparent; }
+.content__list::-webkit-scrollbar-thumb { background: rgba(217,217,217,0.2); }
+
+/* анимация */
+@keyframes spin { to { transform: rotate(360deg); } }
