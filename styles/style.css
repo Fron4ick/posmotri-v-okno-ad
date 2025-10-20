@@ -1,13 +1,12 @@
-/* style.css — очищенная и согласованная версия
-   Ключевая идея: приоритет классов из разметки, доступность, единообразие */
+/* style.css — исправленная версия */
 
+/* общие правила */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* --- базовые настройки --- */
 html, body {
   height: 100%;
   margin: 0;
@@ -22,10 +21,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* макет сделан как фиксированная "канва" */
+  overflow: hidden;
 }
 
-/* --- visually-hidden (один корректный вариант) --- */
+/* visually-hidden */
 .visually-hidden {
   position: absolute !important;
   inline-size: 1px;
@@ -36,7 +35,7 @@ body {
   white-space: nowrap;
 }
 
-/* --- контейнер страницы --- */
+/* page — УБРАЛ transform: scale(1.05) чтобы не увеличивать размеры макета */
 .page {
   width: 1200px;
   max-width: 95vw;
@@ -46,11 +45,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(1.05);
+  /* ранее здесь был transform: scale(1.05); — убрано, т.к. меняло реальные размеры */
   transform-origin: center;
 }
 
-/* --- основной флекс-ряд --- */
+/* основной флекс-ряд */
 .content {
   width: 1140px;
   height: 534px;
@@ -64,14 +63,14 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* --- фокус и доступность --- */
+/* фокус */
 :focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
 :focus { outline: none; }
 
-/* ---------------- LEFT: result ---------------- */
+/* LEFT: result */
 .result {
   width: 711px;
   height: 456px;
@@ -82,14 +81,14 @@ body {
 }
 
 .result__video-container {
-    width: 711px;
-    height: 386px;
-    background: #000;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 711px;
+  height: auto;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .result__video {
@@ -100,7 +99,6 @@ body {
   display: block;
 }
 
-/* overlay для прелоадера/ошибки */
 .result__preloader,
 .result__error {
   position: absolute;
@@ -122,15 +120,16 @@ body {
 }
 
 /* ---------------- search form ---------------- */
+/* важное: height сделан auto, а не фикс 54px — иначе содержимое «вылезает» */
 .search-form {
-    width: 711px;
-    height: 54px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    /* прижимаем к низу */
-    gap: 16px;
-    position: relative;
+  width: 711px;
+  height: 54px;                  /* вы хотите фиксированную высоту */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;           /* центрируем по вертикали, не flex-end */
+  align-self: flex-end;                 /* небольшие отступы между колонками */
+  position: relative;
+  overflow: hidden;            /* чтобы ничего не выпирало визуально */
 }
 
 /* контейнер левой части (город + чекбоксы) */
@@ -141,25 +140,29 @@ body {
   flex: 1;
 }
 
-/* карточки полей/лейблов */
+/* .search-form__label — используется и для текстовых полей, и как базовый класс для label.
+   Он остаётся column, но для чекбоксов ниже есть явный override. */
 .search-form__label {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  box-sizing: border-box;
 }
 
+/* заголовки / тексты */
 .search-form__fieldset-title,
 .search-form__checkbox-text,
 .search-form__label-text {
+  margin: 0;
+  padding: 0;
   font-size: 18px;
-  color: #fff;
   line-height: 22px;
   font-weight: 400;
 }
 
-/* инпут-обёртка (в некоторых вариантах в разметке есть) */
-.search-form__input,
-.search-form__textfield {
+/* инпут-обёртка по прежнему есть, но реальные границы ставим на сам input */
+.search-form__input {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
   padding: 2px 6px;
@@ -168,11 +171,9 @@ body {
   align-items: center;
 }
 
-/* сам текстовый input */
-.search-form__text,
-.search-form__textfield input,
-input.search-form__text,
-input.search-form__textfield {
+/* вот важное исправление: границы ставим на сам input (класс присвоен в разметке) */
+input.search-form__textfield,
+input.search-form__text {
   background: transparent;
   border: 0;
   color: rgba(255,255,255,0.9);
@@ -180,16 +181,21 @@ input.search-form__textfield {
   font-family: inherit;
   appearance: none;
   width: 100%;
+  padding: 0 6px;            /* убрал вертикальные паддинги, т.к. высота контейнера строго 54px */
+  height: 28px;              /* меньше конфликтов с выравниванием */
+  line-height: 1;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  box-sizing: border-box;
 }
 
-.search-form__text::placeholder,
-.search-form__textfield::placeholder,
-input.search-form__text::placeholder,
-input.search-form__textfield::placeholder {
+/* плейсхолдер */
+input.search-form__textfield::placeholder,
+input.search-form__text::placeholder {
   color: rgba(255,255,255,0.6);
 }
 
-/* fieldset basics */
+/* fieldset */
 .search-form__fieldset {
   border: 0;
   padding: 0;
@@ -199,6 +205,7 @@ input.search-form__textfield::placeholder {
   gap: 16px;
 }
 
+/* список чекбоксов */
 .search-form__checkbox-list {
   display: flex;
   gap: 12px;
@@ -206,24 +213,29 @@ input.search-form__textfield::placeholder {
   margin-top: 2px;
 }
 
-/* кастомные чекбоксы (label содержит input + псевдоэлемент) */
+/* кастомные чекбоксы: ОЧЕНЬ ВАЖНО — переопределяем поведение по умолчанию .search-form__label,
+   потому что вы используете один и тот же класс для разных типов label'ов */
 .search-form__checkbox {
   display: inline-flex;
+  /* override: чекбокс — всегда строка: квадрат слева, текст справа */
+  flex-direction: row;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   user-select: none;
 }
 
+/* квадрат пометки */
 .search-form__pseudo-checkbox {
   width: 19px;
   height: 19px;
   border: 1px solid #fff;
   display: inline-block;
   position: relative;
+  flex: 0 0 19px;
 }
 
-/* галочка/заполнение внутри псевдокнопки */
+/* заливка при checked */
 .search-form__pseudo-checkbox::after {
   content: "";
   position: absolute;
@@ -233,21 +245,19 @@ input.search-form__textfield::placeholder {
   transition: opacity .12s;
 }
 
-/* надёжный селектор для checked — учитываем разные имена классов input'ов в разметке */
+/* надёжный checked-селектор — учитывает визуально скрытый input внутри label */
 .search-form__checkbox input:checked + .search-form__pseudo-checkbox::after,
-.search-form__checkbox-input:checked + .search-form__pseudo-checkbox::after,
-.search-form__checkbox input:checked + .search-form__pseudo-checkbox::after {
+.search-form__checkbox-input:checked + .search-form__pseudo-checkbox::after {
   opacity: 1;
 }
 
-/* текст рядом с чекбоксом */
-.search-form__checkbox-text,
-.search-form__label-text {
-  font-size: 18px;
+/* жирность текста для вариантов утро/день/ночь */
+.search-form__checkbox .search-form__label-text {
+  font-weight: 700;
 }
 
 /* hover underline */
-.search-form__checkbox:hover .search-form__checkbox-text,
+.search-form__checkbox:hover .search-form__label-text,
 .button:hover,
 .content__card-link:hover .content__video-card-title,
 .content__card-link:hover .content__video-card-description {
@@ -273,10 +283,9 @@ input.search-form__textfield::placeholder {
   align-items: center;
   justify-content: center;
   align-self: flex-end;
-  margin-top: auto;
 }
 
-/* ---------------- RIGHT: details ---------------- */
+/* RIGHT details */
 .content__details {
   width: 399px;
   height: 534px;
@@ -289,8 +298,6 @@ input.search-form__textfield::placeholder {
 }
 
 .title {
-  width: 259;
-  height: 210;
   font-family: "Oswald", Arial, sans-serif;
   font-weight: 850;
   font-size: 75px;
@@ -307,10 +314,8 @@ input.search-form__textfield::placeholder {
   margin-left: 6px;
 }
 
-/* ---------------- список результатов ---------------- */
+/* список результатов */
 .content__search-results {
-  width: 390px;
-  height: 566px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -338,8 +343,6 @@ input.search-form__textfield::placeholder {
   padding: 8px;
 }
 
-
-
 .content__card-link {
   display: block;
   text-decoration: none;
@@ -351,7 +354,7 @@ input.search-form__textfield::placeholder {
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  padding: 2px; /* немного заполнения, чтобы карточки не слипались с краем */
+  padding: 2px;
 }
 
 .content__video-card-thumbnail {
@@ -410,7 +413,7 @@ img.content__video-card-thumbnail {
   border-radius: 4px;
 }
 
-/* hover и focus для доступности */
+/* hover/focus */
 .content__card-link:hover .content__video-card-title,
 .content__card-link:focus-visible .content__video-card-title {
   text-decoration: underline;
@@ -418,7 +421,7 @@ img.content__video-card-thumbnail {
 
 .content__card-link:focus { outline: none; }
 
-/* more button wrapper */
+/* more button */
 .more-wrap {
   width: 100%;
   flex-shrink: 0;
@@ -439,37 +442,20 @@ img.content__video-card-thumbnail {
   border-top-color: #fff;
   animation: spin 1s linear infinite;
 }
-
-.spinner.small {
-  width: 30px;
-  height: 30px;
-  border-width: 3px;
-}
+.spinner.small { width: 30px; height: 30px; border-width: 3px; }
 
 /* error */
 .error-block,
-.error {
-  padding: 20px;
-  background: #545050;
-  border-radius: 4px;
-}
-
+.error { padding: 20px; background: #545050; border-radius: 4px; }
 .error-text,
-.error__title {
-  margin: 0;
-  color: #fff;
-  font-weight: 700;
-}
+.error__title { margin: 0; color: #fff; font-weight: 700; }
 
 /* курсор для интерактивных элементов */
-a, button, .search-form__checkbox {
-  cursor: pointer;
-}
+a, button, .search-form__checkbox { cursor: pointer; }
 
-/* скроллбар (тонкий) */
+/* скроллбар */
 .content__list::-webkit-scrollbar { width: 6px; }
 .content__list::-webkit-scrollbar-track { background: transparent; }
 .content__list::-webkit-scrollbar-thumb { background: rgba(217,217,217,0.2); }
 
-/* анимация */
 @keyframes spin { to { transform: rotate(360deg); } }
