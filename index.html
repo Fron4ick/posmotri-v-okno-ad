@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,162 +10,105 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/preloader.css" />
     <link rel="stylesheet" href="./styles/error.css" />
-  </head>
-  <body class="page">
+</head>
+
+<body class="page">
     <main class="content">
-      <section class="result">
-        <div class="result__video-container">
-          <video src="" controls class="result__video" poster=""></video>
-          <!-- Варианты прелоадера/ошибки: чтобы скрипт (образцовый/ваш) нашёл нужный элемент -->
-          <div class="result__preloader visually-hidden" aria-hidden="true"></div>
-          <div class="result__error visually-hidden" role="status"></div>
-        </div>
-
-        <form class="search-form" action="#" novalidate>
-          <fieldset class="search-form__fieldset">
-            <h2 class="search-form__fieldset-title">Город</h2>
-            <label class="search-form__label">
-              <span class="search-form__label-text visually-hidden">Город</span>
-              <input
-                type="text"
-                placeholder="Санкт Петербург, например"
-                name="city"
-                class="search-form__textfield search-form__text"
-              />
-            </label>
-          </fieldset>
-          <fieldset class="search-form__fieldset">
-            <h2 class="search-form__fieldset-title">Время суток</h2>
-            <div class="search-form__checkbox-list">
-              <label class="search-form__label search-form__checkbox">
-                <input
-                  type="checkbox"
-                  name="time"
-                  value="morning"
-                  class="search-form__checkbox-input visually-hidden"
-                />
-                <span class="search-form__pseudo-checkbox"></span>
-                <span class="search-form__label-text">Утро</span>
-              </label>
-              <label class="search-form__label search-form__checkbox">
-                <input
-                  type="checkbox"
-                  name="time"
-                  value="afternoon"
-                  class="search-form__checkbox-input visually-hidden"
-                />
-                <span class="search-form__pseudo-checkbox"></span>
-                <span class="search-form__label-text">День</span>
-              </label>
-              <label class="search-form__label search-form__checkbox">
-                <input
-                  type="checkbox"
-                  name="time"
-                  value="night"
-                  class="search-form__checkbox-input visually-hidden"
-                />
-                <span class="search-form__pseudo-checkbox"></span>
-                <span class="search-form__label-text">Ночь</span>
-              </label>
+        <section class="result">
+            <div class="result__video-container">
+                <video src="" controls class="result__video" poster=""></video>
+                <!-- Варианты прелоадера/ошибки: чтобы скрипт (образцовый/ваш) нашёл нужный элемент -->
+                <div class="result__preloader visually-hidden" aria-hidden="true"></div>
+                <div class="result__error visually-hidden" role="status"></div>
             </div>
-          </fieldset>
-          <button type="submit" class="button search-form__submit-button">
-            Найти
-          </button>
-        </form>
-      </section>
 
-      <section class="content__details">
-        <h1 class="title">
-          <span class="content__accent">По-</span><br />смотри<br />в окно
-        </h1>
-        <div class="content__list-container content__search-results">
-          <ul class="content__list" tabindex="0" aria-live="polite">
-            <!-- сюда добавляются карточки -->
-          </ul>
+            <form class="search-form" action="#" novalidate>
+                <fieldset class="search-form__fieldset">
+                    <h2 class="search-form__fieldset-title">Город</h2>
+                    <label class="search-form__label">
+                        <span class="search-form__label-text visually-hidden">Город</span>
+                        <input type="text" placeholder="Санкт Петербург, например" name="city"
+                            class="search-form__textfield search-form__text" />
+                    </label>
+                </fieldset>
+                <fieldset class="search-form__fieldset">
+                    <h2 class="search-form__fieldset-title">Время суток</h2>
+                    <div class="search-form__checkbox-list">
+                        <label class="search-form__label search-form__checkbox">
+                            <input type="checkbox" name="time" value="morning"
+                                class="search-form__checkbox-input visually-hidden" />
+                            <span class="search-form__pseudo-checkbox"></span>
+                            <span class="search-form__label-text">Утро</span>
+                        </label>
+                        <label class="search-form__label search-form__checkbox">
+                            <input type="checkbox" name="time" value="afternoon"
+                                class="search-form__checkbox-input visually-hidden" />
+                            <span class="search-form__pseudo-checkbox"></span>
+                            <span class="search-form__label-text">День</span>
+                        </label>
+                        <label class="search-form__label search-form__checkbox">
+                            <input type="checkbox" name="time" value="night"
+                                class="search-form__checkbox-input visually-hidden" />
+                            <span class="search-form__pseudo-checkbox"></span>
+                            <span class="search-form__label-text">Ночь</span>
+                        </label>
+                    </div>
+                </fieldset>
+                <button type="submit" class="button search-form__submit-button">
+                    Найти
+                </button>
+            </form>
+        </section>
 
-          <!-- вариант прелоадера списка (из образцового) -->
-          <div class="content__list-preloader visually-hidden" aria-hidden="true"></div>
-        </div>
-      </section>
+        <section class="content__details">
+            <h1 class="title">
+                <span class="content__accent">По-</span><br />смотри<br />в окно
+            </h1>
+            <div class="content__list-container content__search-results">
+                <ul class="content__list" tabindex="0" aria-live="polite">
+                    <!-- сюда добавляются карточки -->
+                </ul>
+
+                <!-- вариант прелоадера списка (из образцового) -->
+                <div class="content__list-preloader visually-hidden" aria-hidden="true"></div>
+            </div>
+        </section>
     </main>
 
-    <!-- Шаблоны. Я оставил и ваши имена шаблонов, и имена из образцового.
-         Скрипт выбирает первый найденный (fallback). -->
-
-    <!-- Ваш шаблон карточки (cards-list-item-template) -->
-    <template class="cards-list-item-template">
-      <li>
-        <a href="#0" class="content__card-link">
-          <article class="content__video-card">
-            <div class="content__video-card-description-container">
-              <h2 class="content__video-card-title"></h2>
-              <p class="content__video-card-description"></p>
-            </div>
-            <img src="" alt="" class="content__video-card-thumbnail" />
-          </article>
-        </a>
-      </li>
-    </template>
-
-    <!-- Образцовый шаблон карточки (video-card-template) -->
-    <template class="video-card-template">
-      <li>
-        <a class="content__card-link" href="#" data-src="">
-          <div class="content__video-card">
-            <div class="content__video-card-description-container">
-              <h3 class="content__video-card-title"></h3>
-              <p class="content__video-card-description"></p>
-            </div>
-            <div class="content__video-card-thumbnail"><img alt="" /></div>
-          </div>
-        </a>
-      </li>
-    </template>
-
-    
-    <!-- Прелоадер (оба варианта) -->
     <template class="preloader-template">
-      <div class="preloader">
-        <div class="preloader-chasing-squares">
-          <div class="square"></div>
-          <div class="square"></div>
-          <div class="square"></div>
-          <div class="square"></div>
+        <div class="preloader">
+            <div class="preloader-chasing-squares">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
         </div>
-      </div>
     </template>
 
-    <!-- Образцовый preloader (spinner) -->
-    <template class="preloader-template-spinner">
-      <div class="preloader">
-        <div class="spinner"></div>
-      </div>
+    <template class="cards-list-item-template">
+        <li class="content__list-item">
+            <a href="#0" class="content__card-link">
+                <article class="content__video-card">
+                    <div class="content__video-card-description-container">
+                        <h2 class="content__video-card-title"></h2>
+                        <p class="content__video-card-description"></p>
+                    </div>
+                    <img src="" alt="" class="content__video-card-thumbnail" />
+                </article>
+            </a>
+        </li>
     </template>
-
-    <!-- Кнопка "показать ещё" (оба варианта) -->
     <template class="more-button-template">
-      <button class="button more-button">Показать еще</button>
-    </template>
-    <template class="more-button-template-variant">
-      <div class="more-wrap">
-        <button class="button more-button">Показать ещё</button>
-      </div>
+        <button class="button more-button">Показать еще</button>
     </template>
 
-    <!-- Ошибка (оба варианта) -->
     <template class="error-template">
-      <div class="error">
-        <h2 class="error__title">Из этого города нет видео :(</h2>
-      </div>
+        <div class="error">
+            <h2 class="error__title">Из этого города нет видео :(</h2>
+        </div>
     </template>
+    <script src="./scripts/script.js"></script>
+</body>
 
-    <template class="error-template-variant">
-      <div class="error-block">
-        <p class="error-text"></p>
-      </div>
-    </template>
-
-    <script src="./scripts/script.js" defer></script>
-  </body>
 </html>

@@ -126,10 +126,7 @@ body {
   height: 54px;                  /* вы хотите фиксированную высоту */
   display: flex;
   justify-content: space-between;
-  align-items: center;           /* центрируем по вертикали, не flex-end */
-  align-self: flex-end;                 /* небольшие отступы между колонками */
-  position: relative;
-  overflow: hidden;            /* чтобы ничего не выпирало визуально */
+  align-self: flex-end;     
 }
 
 /* контейнер левой части (город + чекбоксы) */
@@ -197,12 +194,12 @@ input.search-form__text::placeholder {
 
 /* fieldset */
 .search-form__fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
 }
 
 /* список чекбоксов */
@@ -249,11 +246,6 @@ input.search-form__text::placeholder {
 .search-form__checkbox input:checked + .search-form__pseudo-checkbox::after,
 .search-form__checkbox-input:checked + .search-form__pseudo-checkbox::after {
   opacity: 1;
-}
-
-/* жирность текста для вариантов утро/день/ночь */
-.search-form__checkbox .search-form__label-text {
-  font-weight: 700;
 }
 
 /* hover underline */
