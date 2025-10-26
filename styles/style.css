@@ -97,20 +97,21 @@ body {
   width: 711px;
   height: 54px;
   display: flex;
-  gap: 35px;
+  gap: 40px;
 }
 
 .search-form__fieldset {
   border: 0;
+  width: 225px;
   padding: 0;
   margin: 0;
   display: flex;
+  gap: 5px;
   flex-direction: column;
-  gap: 7px;
-  flex: 1;
 }
 
 .search-form__fieldset-title {
+  width: fit-content;
   font-size: 18px;
   font-weight: 400;
   margin: 0;
@@ -119,9 +120,9 @@ body {
 .search-form__label {
   display: flex;
   width: auto;
-  align-items: center;
   gap: 5px;
   cursor: pointer;
+  align-items: center;
 }
 
 .search-form__textfield {
@@ -130,7 +131,7 @@ body {
   color: rgba(255,255,255,0.9);
   font-size: 18px;
   font-family: inherit;
-  width: 100%;
+  width: 225px;
   padding: 2px 0;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
@@ -142,15 +143,9 @@ body {
 }
 
 .search-form__checkbox-list {
+  width: 212px;
   display: flex;
-  justify-content: space-around;
-}
-
-.search-form__label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
+  gap: 15px;
 }
 
 .search-form__pseudo-checkbox {
@@ -233,13 +228,11 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 100%;
   flex: 1;
-  overflow-y: auto;
   overflow-x: hidden;
   display: flex;
+  gap: 25px;
   flex-direction: column;
-  gap: 30px;
 }
 
 .content__list-item:last-of-type {
@@ -259,7 +252,6 @@ body {
 .content__card-link {
   display: block;
   text-decoration: none;
-  color: inherit;
   margin: 2px;
 }
 
@@ -271,7 +263,6 @@ body {
 .content__video-card {
   display: flex;
   gap: 12px;
-  padding: 2px;
 }
 
 .content__video-card-thumbnail {
