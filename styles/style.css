@@ -71,7 +71,6 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  position: relative;
 }
 
 .result__video{
@@ -215,7 +214,6 @@ body{
   position:relative;
   overflow:hidden;
   flex-direction:column;
-  position: relative;
 }
 
 .content__list{
